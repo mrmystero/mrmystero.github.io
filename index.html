@@ -1,89 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Funny Website</title>
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: radial-gradient(#3aa19f 42%, #59ff00 100%);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Backrooms - Parody Survival Experience</title>
+  <style>
+    :root {
+      --bg-color: #0a0a0a;
+      --yellow-mono: #C2B280;
+      --yellow-glow: #fef08a;
+      --accent-cyan: #06b6d4;
+      --text-color: #fef3c7;
+      --card-bg: rgba(25, 23, 18, 0.7);
+    }
 
-        header {
-            text-align: center;
-            padding: 40px 0;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        nav {
-            overflow: hidden;
-            border-bottom: 2px solid #00bfff;
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
 
-        nav a {
-            float: left;
-            display: block
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            transition: background-color 0.3s, color 0.3s;
-        }
+    /* Subtle background ambient noise scanlines overlay */
+    body::before {
+      content: " ";
+      display: block;
+      position: fixed;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      z-index: 999;
+      background-size: 100% 4px, 6px 100%;
+      pointer-events: none;
+    }
 
-        nav a:hover {
-            background-color: #00bfff;
-            color: #111;
-        }
+    /* Flickering light animation */
+    @keyframes humFlicker {
+      0%, 100% { opacity: 0.95; text-shadow: 0 0 15px rgba(254, 240, 138, 0.4); }
+      50% { opacity: 1; text-shadow: 0 0 25px rgba(254, 240, 138, 0.7), 0 0 40px rgba(234, 179, 8, 0.3); }
+      51% { opacity: 0.85; }
+      52% { opacity: 1; }
+    }
 
-        main {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #111;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-        }
+    /* Hero Section */
+    header {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      background: radial-gradient(circle at center, rgba(194, 178, 128, 0.15) 0%, rgba(10, 10, 10, 1) 70%);
+      border-bottom: 1px solid rgba(194, 178, 128, 0.1);
+    }
 
-        p {
-            margin-bottom: 40px;
-        }
+    .logo-sub {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4em;
+      color: var(--yellow-mono);
+      opacity: 0.8;
+      margin-bottom: 0.5rem;
+    }
 
-        h2 {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
+    h1 {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      color: var(--yellow-glow);
+      letter-spacing: 0.15em;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      animation: humFlicker 4s infinite;
+    }
 
-        p {
-            line-height: 1.6;
-        }
+    .tagline {
+      max-width: 600px;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: #d1d5db;
+      font-weight: 300;
+    }
 
-        footer {
-            margin-top: 20px;
-            padding: 20px 0;
-            text-align: center;
-        }
-    </style>
+    /* Main Content Containers */
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    section {
+      margin-bottom: 5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--yellow-glow);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+      border-left: 4px solid var(--yellow-mono);
+      padding-left: 1rem;
+    }
+
+    p {
+      margin-bottom: 1.25rem;
+      color: #9ca3af;
+    }
+
+    /* Creative Grid for Content */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid rgba(194, 178, 128, 0.15);
+      border-radius: 6px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(194, 178, 128, 0.3);
+    }
+
+    /* Controls Styling */
+    .controls-list {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .key {
+      background: #1f2937;
+      border: 1px solid var(--yellow-mono);
+      color: var(--yellow-glow);
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.9rem;
+      text-align: center;
+      box-shadow: 0 2px 0 var(--yellow-mono);
+    }
+
+    .action {
+      color: #e5e7eb;
+      font-size: 0.95rem;
+    }
+
+    /* Entity Warning Highlight Box */
+    .warning-box {
+      background: rgba(127, 29, 29, 0.2);
+      border: 1px solid #ef4444;
+      padding: 1.5rem;
+      border-radius: 6px;
+      margin-top: 1.5rem;
+    }
+
+    .warning-box h3 {
+      color: #fca5a5;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    /* Big CTA Action Button Section */
+    .cta-container {
+      text-align: center;
+      padding: 4rem 0;
+      border-top: 1px solid rgba(194, 178, 128, 0.1);
+    }
+
+    .play-btn {
+      display: inline-block;
+      text-decoration: none;
+      background: #ca8a04;
+      color: #000;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      padding: 1.5rem 4.5rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 40px rgba(202, 138, 4, 0.4);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+    }
+
+    .play-btn:hover {
+      background: #eab308;
+      transform: scale(1.08);
+      box-shadow: 0 0 60px rgba(234, 179, 8, 0.7);
+    }
+
+    .play-btn:active {
+      transform: scale(0.98);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: #4b5563;
+      letter-spacing: 0.05em;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Tashwin's </h1>
-    </header>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="news.html">News</a>
-        <a href="reviews.html">Reviews</a>
-        <a href="#">Tutorials</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-    </nav>
+  <header>
+    <div class="logo-sub">An Interactive Experience</div>
+    <h1>THE BACKROOMS</h1>
+    <p class="tagline">You have noclipped out of reality in incorrect areas. There is no going back, but there might be a way out.</p>
+  </header>
 
-    <main>
-        <p> hi this website has been abadoned so i am currently trying to buildd it up again</p>
-    </main>
+  <main>
+    
+    <section class="grid">
+      <div class="card">
+        <h2>What Is It?</h2>
+        <p>This is a suspenseful 3D survival game built entirely using web native technologies. Trapped inside Level 0—the classic "Lobby" of the Backrooms—you are surrounded by billions of square miles of randomly segmented rooms, mono-yellow wallpaper, and the maddening hum of fluorescent lights.</p>
+        <p>Your sole objective is to track down and harness <strong>10 glowing power cubes</strong> hidden within the environment. Feeding these cubes into the heavy facility security locks is your only ticket back to reality.</p>
+      </div>
 
-    <footer>
-        <p>&copy; 2023 Futuristic Tech Hub. All rights reserved.</p>
-    </footer>
+      <div class="card">
+        <h2>The Inspiration</h2>
+        <p>Inspired by the legendary internet creepypastas and liminal space aesthetics, this project handles the horrors of isolation with a creative, modern twist. </p>
+        <p>It blends the vintage, analog dread of early internet urban legends with reactive mechanics. Every pillar and corridor is procedurally textured to deliver that heavy, crushing atmosphere of a place you shouldn't be, mixed with arcade-style pacing.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Survival Guide</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>The Mechanics</h3>
+          <p style="margin-top: 0.5rem;">Time is running out. You have exactly <strong>7 minutes</strong> before the exit system locks completely, trapping you inside the hum forever.</p>
+          
+          <div class="controls-list">
+            <span class="key">W A S D</span> <span class="action">Navigate the halls</span>
+            <span class="key">SHIFT</span> <span class="action">Sprint (Drains Stamina)</span>
+            <span class="key">MOUSE</span> <span class="action">Look around (360° Flashlight)</span>
+            <span class="key">E</span> <span class="action">Interact / Escape at the Door</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>The Stalker</h3>
+          <p>You are not completely alone in the damp halls. A manifestation of the environment drifts endlessly through the corridors searching for intruders.</p>
+          
+          <div class="warning-box">
+            <h3>⚠️ THREAT ASSESSMENT</h3>
+            <p style="color: #fca5a5; margin-bottom: 0;">The entity hunts predominantly by sight. It will accelerate drastically upon catching your line of sight. If spotted, immediately duck behind heavy pillars or break line of sight to force it back into its patrol cycle.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-container">
+      <p style="margin-bottom: 2rem; font-size: 1.1rem; color: var(--yellow-mono);">Ensure your audio is turned on. Dim the room lights.</p>
+      <a href="play.html" class="play-btn">ENTER THE VOID</a>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 Backrooms Parody Project. Proceed at your own risk.</p>
+  </footer>
+
 </body>
 </html>
